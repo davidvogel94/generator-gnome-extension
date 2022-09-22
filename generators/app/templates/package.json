@@ -1,0 +1,25 @@
+{
+  "name": "",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.2",
+    "gts": "^3.1.1",
+    "typescript": "^4.8.3"
+  },
+  "scripts": {
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "fix": "gts fix",
+    "copyfiles": "cp ./src/*.css ./build/",
+    "build": "yarn clean && tsc && yarn copyfiles",
+    "cleanextension": "",
+    "copyextension": "",
+    "deploy": "yarn build && yarn cleanextension && yarn copyextension"
+  }
+}
