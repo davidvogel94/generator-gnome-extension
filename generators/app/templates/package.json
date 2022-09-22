@@ -21,5 +21,8 @@
     "cleanextension": "",
     "copyextension": "",
     "deploy": "yarn build && yarn cleanextension && yarn copyextension"
+  },
+  "dependencies": {
+    "gnome-shell-extension-types": "^0.0.1"
   }
 }
