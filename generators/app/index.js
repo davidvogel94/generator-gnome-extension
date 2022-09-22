@@ -70,18 +70,16 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    this.fs.copy(this.templatePath("src"), this.destinationPath("src"));
     this.fs.copy(
-      [
-        this.templatePath("src/extension.ts"),
-        this.templatePath("src/prefs.js"),
-        this.templatePath("src/stylesheet.css")
-      ],
-      this.destinationPath("src")
+      this.templatePath("resources"),
+      this.destinationPath("resources")
     );
     this.fs.copy(
       [
         this.templatePath(".editorconfig"),
         this.templatePath(".gitignore"),
+        this.templatePath("rollup.config.js"),
         this.templatePath("tsconfig.json")
       ],
       this.destinationPath("")
@@ -92,14 +90,14 @@ module.exports = class extends Generator {
   }
 
   _writeMetadata() {
-    var j = this.fs.readJSON(this.templatePath("src/metadata.json"));
+    var j = this.fs.readJSON(this.templatePath("resources/metadata.json"));
     j.name = this.options.name;
     j.description = this.answers.description;
     j["shell-version"] = this.answers["shell-version"].split(",");
     j.url = this.answers.url;
     j.uuid = this.answers.uuid;
     j.version = this.answers.version;
-    this.fs.writeJSON(this.destinationPath("src/metadata.json"), j);
+    this.fs.writeJSON(this.destinationPath("resources/metadata.json"), j);
   }
 
   _writePackageJson() {

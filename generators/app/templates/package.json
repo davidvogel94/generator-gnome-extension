@@ -8,16 +8,23 @@
     "url": ""
   },
   "devDependencies": {
-    "gnome-shell-extension-types": "^0.0.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-typescript": "^8.5.0",
     "gts": "^3.1.1",
-    "typescript": "^4.8.3"
+    "rollup": "^2.79.1",
+    "rollup-plugin-cleanup": "^3.2.1",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-styles": "^4.0.0",
+    "rollup-plugin-visualizer": "^5.8.1",
+    "typescript": "^4.8.3",
+    "gnome-shell-extension-types": "^0.0.1"
   },
   "scripts": {
     "lint": "gts lint",
     "clean": "gts clean",
     "fix": "gts fix",
-    "copyfiles": "cp ./src/*.css ./build/",
-    "build": "yarn clean && tsc && yarn copyfiles",
+    "build": "yarn clean && rollup -c",
     "cleanextension": "",
     "copyextension": "",
     "deploy": "yarn build && yarn cleanextension && yarn copyextension"
