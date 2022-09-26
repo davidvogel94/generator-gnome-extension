@@ -1,37 +1,35 @@
-/// <reference path="../node_modules/gnome-shell-extension-types/global.d.ts"/>
-
+import { main as Main } from '@gnome-shell-ts-declarations/ui';
+import { panelButton } from '@gnome-extension/ui/panelButton';
 import './styles/stylesheet.css';
 
-const {St, Clutter} = imports.gi;
-const Main = imports.ui.main;
+//@ts-ignore
+const getCurrentExtension = (): any => imports.misc.extensionUtils.getCurrentExtension();
 
-class GnomeExtension {
-    private panelButton: StButton;
-
-    constructor() {
-        // Create a Button with "Hello World" text
-        let panelButtonText = new St.Label({
-            text: 'Hello World!',
-            y_align: Clutter.ActorAlign.CENTER,
-        });
-        this.panelButton = new St.Button({
-            style_class: 'panel-button',
-            child: panelButtonText
-        });
-    }
-    
-    enable(): void {
-        // Add the button to the panel
-        Main.panel._rightBox.insert_child_at_index(this.panelButton, 0);
-    }
-    
-    disable(): void {
-        // Remove the added button from panel
-        Main.panel._rightBox.remove_child(this.panelButton);
-    }
+enum PanelBoxes {
+  LEFT = 0,
+  CENTER = 1,
+  RIGHT = 2,
 }
 
-export default function(): GnomeExtension {
-    return new GnomeExtension();
+class JiraIssueTrackerExtension {
+  //@ts-ignore
+  private panelButton: PanelMenu.Button;
+
+  constructor() {}
+
+  enable(): void {
+    // Create a Button with "Hello World" text
+    this.panelButton = new panelButton('Hello World');
+    // Add the button to the panel
+    Main.panel.addToStatusArea(getCurrentExtension().metadata.uuid, this.panelButton, 1, PanelBoxes.RIGHT);
+  }
+
+  disable(): void {
+    // Remove the added button from panel
+    this.panelButton.destroy();
+  }
 }
 
+export default function (): JiraIssueTrackerExtension {
+  return new JiraIssueTrackerExtension();
+}

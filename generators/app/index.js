@@ -1,4 +1,5 @@
 "use strict";
+
 const Generator = require("yeoman-generator");
 const chalk = require("chalk");
 const yosay = require("yosay");
@@ -22,48 +23,48 @@ module.exports = class extends Generator {
       {
         type: "input",
         name: "description",
-        message: "Extension description"
+        message: "Extension description",
       },
       {
         type: "input",
         name: "author-name",
         message: "Author name",
-        default: ""
+        default: "",
       },
       {
         type: "input",
         name: "author-email",
         message: "Author email address",
-        default: ""
+        default: "",
       },
       {
         type: "input",
         name: "author-website",
         message: "Author website",
-        default: ""
+        default: "",
       },
       {
         type: "input",
         name: "url",
-        message: "Extension url (e.g. Github repo)"
+        message: "Extension url (e.g. Github repo)",
       },
       {
         type: "input",
         name: "uuid",
-        message: "Extension uuid (e.g. extname@author.github.io)"
+        message: "Extension uuid (e.g. extname@author.github.io)",
       },
       {
         type: "number",
         name: "version",
         message: "Extension version",
-        default: 1.0
+        default: 1.0,
       },
       {
         type: "input",
         name: "shell-version",
         message: "Gnome shell versions (comma-delimited)",
-        default: "42.0"
-      }
+        default: "42.0",
+      },
     ];
 
     this.answers = await this.prompt(prompts);
@@ -76,11 +77,19 @@ module.exports = class extends Generator {
       this.destinationPath("resources")
     );
     this.fs.copy(
+      this.templatePath("gnome-shell-ts-declarations"),
+      this.destinationPath("gnome-shell-ts-declarations")
+    );
+    this.fs.copy(
       [
         this.templatePath(".editorconfig"),
         this.templatePath(".gitignore"),
+        this.templatePath(".gitmodules"),
         this.templatePath("rollup.config.js"),
-        this.templatePath("tsconfig.json")
+        this.templatePath("tsconfig.json"),
+        this.templatePath(".eslintrc.js"),
+        this.templatePath(".eslintignore"),
+        this.templatePath(".prettierrc.js"),
       ],
       this.destinationPath("")
     );
@@ -108,10 +117,14 @@ module.exports = class extends Generator {
     j.author = {
       name: this.answers["author-name"],
       email: this.answers["author-email"],
-      url: this.answers["author-website"]
+      url: this.answers["author-website"],
     };
-    j.scripts.cleanextension = `rm -rf ~/.local/share/gnome-shell/extensions/${this.answers.uuid}`;
-    j.scripts.copyextension = `cp -r ./build ~/.local/share/gnome-shell/extensions/${this.answers.uuid}`;
+    j.scripts[
+      "clean:extension"
+    ] = `rm -rf ~/.local/share/gnome-shell/extensions/${this.answers.uuid}`;
+    j.scripts[
+      "copy:extension"
+    ] = `cp -r ./build ~/.local/share/gnome-shell/extensions/${this.answers.uuid}`;
     this.fs.writeJSON(this.destinationPath("package.json"), j);
   }
 };

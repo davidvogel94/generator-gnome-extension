@@ -1,9 +1,7 @@
 {
-  "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "lib": ["ES2021"],
     "target": "ES2021",
-    "rootDirs": ["src"],
     "baseUrl": "./src/",
     "outDir": "./build/",
     "resolveJsonModule": true,
@@ -11,18 +9,20 @@
     "declarationMap": false,
     "sourceMap": false,
     "strictNullChecks": true,
+    "strictPropertyInitialization": false,
     "alwaysStrict": true,
-    "removeComments": true,
     "allowJs": true,
     "checkJs": true,
     "noImplicitAny": false,
+    "noImplicitThis": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false,
     "moduleResolution": "Node",
     "paths": {
-      "@dv94/*": ["./*"]
+      "@gnome-extension/*": ["./*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.json"]
+  "typeRoots": ["./node_modules/@types", "./node_modules/@gi-types", "./imports.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.json"],
+  "exclude": ["./build"]
 }

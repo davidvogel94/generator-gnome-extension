@@ -1,0 +1,13 @@
+{
+  "name": "@gnome-shell-ts-declarations/signaltracker",
+  "types": "index",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@gnome-shell-ts-declarations/signals": "./signals"
+  },
+  "bundledDependencies": [
+    "@gnome-shell-ts-declarations/signals"
+  ]
+}

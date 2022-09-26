@@ -1,7 +1,7 @@
-import { debug } from "console"
+import { debug } from 'console';
 
 const init = (): void => {
-    debug('prefs initialized');
-}
+  debug('prefs initialized');
+};
 
 export default { init };

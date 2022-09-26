@@ -1,0 +1,3 @@
+[submodule "gnome-shell-ts-declarations"]
+	path = generators/app/templates/gnome-shell-ts-declarations
+	url = https://github.com/davidvogel94/gnome-shell-ts-declarations.git

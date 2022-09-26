@@ -1,0 +1,18 @@
+{
+  "name": "gnome-shell-ts-declarations",
+  "version": "1.0.0",
+  "main": "",
+  "types": "index.d.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@gi-types/clutter10": "^10.0.1",
+    "@gi-types/gobject2": "^2.72.1",
+    "@gi-types/st1": "^1.0.1",
+    "typescript": "^4.8.3"
+  },
+  "bundledDependencies": [
+    "@gnome-shell-ts-declarations/ui",
+    "@gnome-shell-ts-declarations/signals",
+    "@gnome-shell-ts-declarations/signaltracker"
+  ]
+}

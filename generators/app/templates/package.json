@@ -8,25 +8,49 @@
     "url": ""
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^14.1.0",
     "@rollup/plugin-typescript": "^8.5.0",
-    "gts": "^3.1.1",
-    "rollup": "^2.79.1",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "rollup": "^2.78.1",
     "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-styles": "^4.0.0",
     "rollup-plugin-visualizer": "^5.8.1",
-    "typescript": "^4.8.3",
-    "gnome-shell-extension-types": "^0.0.1"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "scripts": {
-    "lint": "gts lint",
-    "clean": "gts clean",
-    "fix": "gts fix",
-    "build": "yarn clean && rollup -c",
-    "cleanextension": "",
-    "copyextension": "",
-    "deploy": "yarn build && yarn cleanextension && yarn copyextension"
+    "lint": "eslint --ext .ts src/",
+    "fix": "eslint --fix --ext .ts src/",
+    "build:ts": "yarn lint && rollup -c",
+    "clean:ts": "rm -rf ./build",
+    "clean:extension": "rm -rf ~/.local/share/gnome-shell/extensions/gnome-jira-issue-tracker@davidvogel94.github.io",
+    "copy:extension": "cp -r ./build ~/.local/share/gnome-shell/extensions/gnome-jira-issue-tracker@davidvogel94.github.io",
+    "deploy": "yarn build:ts && yarn clean:extension && yarn copy:extension"
+  },
+  "dependencies": {
+    "@gi-types/base-types": "^1.0.0",
+    "@gi-types/clutter10": "^10.0.1",
+    "@gi-types/gtk4-types": "^1.0.0",
+    "@gi-types/shell0": "^0.1.1",
+    "@gi-types/st1": "^1.0.1",
+    "@gnome-shell-ts-declarations/signals": "./gnome-shell-ts-declarations/signals",
+    "@gnome-shell-ts-declarations/ui": "./gnome-shell-ts-declarations/ui",
+    "gnome-shell-ts-declarations": "./gnome-shell-ts-declarations",
+    "json": "^11.0.0"
   }
 }
